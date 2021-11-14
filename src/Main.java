@@ -7,9 +7,20 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         int inp = scanner.nextInt();
         BigInteger ans_power = two_power(inp);
-        BigInteger ans_fib = fib(inp);
+        BigInteger ans_fib = dp_fib(inp);
         System.out.println("2^n = " + ans_power);
         System.out.println("fib(" + inp + ") = " + ans_fib);
+    }
+
+    private static BigInteger dp_fib(int n) {
+        BigInteger f[] = new BigInteger[n + 2];
+        f[0] = BigInteger.ZERO;
+        f[1] = BigInteger.ONE;
+
+        for (int i = 2; i <= n; i++) {
+            f[i] = f[i - 1].add(f[i - 2]);
+        }
+        return f[n];
     }
 
     private static BigInteger fib(int n) {
@@ -24,17 +35,6 @@ public class Main {
             ans = ans.multiply(BigInteger.TWO);
         }
         return ans;
-    }
-
-    private static BigInteger dp_fib(int n) {
-        BigInteger f[] = new BigInteger[n + 2];
-        f[0] = BigInteger.ZERO;
-        f[1] = BigInteger.ONE;
-
-        for (int i = 2; i <= n; i++) {
-            f[i] = f[i - 1].add(f[i - 2]);
-        }
-        return f[n];
     }
 }
 
